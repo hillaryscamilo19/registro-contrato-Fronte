@@ -1,0 +1,14 @@
+<h2>Lista de Contratos</h2>
+<table>
+  <tr>
+    <th>Cliente</th>
+    <th>Correo</th>
+    <th>Inicio</th>
+    <th>Vencimiento</th>
+  </tr>
+  <tr *ngfor="let contract of contracts">
+    <td>{{ contract.clientName }}</td>
+    <td>{{ contract.clientEmail }}</td>
+ 
+  </tr>
+</table>
