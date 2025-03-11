@@ -1,0 +1,83 @@
+<!-- src/app/components/contract-table/contract-table.component.html -->
+<div class="table-container mat-elevation-z8">
+    <div class="table-header">
+      <mat-form-field appearance="standard">
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar contratos..." #input>
+      </mat-form-field>
+    </div>
+  
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- Cliente Column -->
+      <ng-container matColumnDef="clientName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
+        <td mat-cell *matCellDef="let contract">
+          <div class="client-info">
+            <div class="client-name">{{contract.clientName}}</div>
+            <div class="client-email">{{contract.clientEmail}}</div>
+          </div>
+        </td>
+      </ng-container>
+  
+      <!-- Descripción Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+        <td mat-cell *matCellDef="let contract"> {{contract.description}} </td>
+      </ng-container>
+  
+      <!-- Fecha de Inicio Column -->
+      <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Inicio </th>
+        <td mat-cell *matCellDef="let contract">
+          <div class="date-cell">
+            <mat-icon>calendar_today</mat-icon>
+            {{formatDate(contract.startDate)}}
+          </div>
+        </td>
+      </ng-container>
+  
+      <!-- Fecha de Vencimiento Column -->
+      <ng-container matColumnDef="expirationDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Vencimiento </th>
+        <td mat-cell *matCellDef="let contract">
+          <div class="date-cell">
+            <mat-icon>schedule</mat-icon>
+            {{formatDate(contract.expirationDate)}}
+          </div>
+        </td>
+      </ng-container>
+  
+      <!-- Estado Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+        <td mat-cell *matCellDef="let contract">
+          <span class="status-badge" [ngClass]="getStatusClass(contract.status)">
+            {{getStatusText(contract.status)}}
+          </span>
+        </td>
+      </ng-container>
+  
+      <!-- Acciones Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let contract">
+          <button mat-icon-button color="primary" (click)="editContract(contract)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteContract(contract.id)" matTooltip="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <!-- Fila para cuando no hay datos -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="6">No se encontraron contratos que coincidan con el filtro "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Seleccionar página de contratos"></mat-paginator>
+  </div>

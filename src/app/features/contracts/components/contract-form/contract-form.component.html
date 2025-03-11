@@ -1,9 +1,77 @@
-<h2>Agregar Contrato</h2>
-<form (submit)="addContract()">
-  <input type="text" placeholder="Nombre del Cliente" >
-  <input type="email" placeholder="Correo del Cliente" >
-  <input type="date" placeholder="Fecha de Inicio" >
-  <input type="date" placeholder="Fecha de Vencimiento" >
-  <button type="submit">Agregar Contrato</button>
-</form>
+<!-- src/app/components/contract-form/contract-form.component.html -->
+<button mat-raised-button color="primary" (click)="openDialog()">
+  <mat-icon>add</mat-icon>
+  Agregar Contrato
+</button>
 
+<ng-template #formDialog>
+  <h2 mat-dialog-title>{{contract ? 'Editar Contrato' : 'Agregar Nuevo Contrato'}}</h2>
+  <mat-dialog-content>
+    <form [formGroup]="contractForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre del Cliente</mat-label>
+          <input matInput formControlName="clientName" required>
+          <mat-error *ngIf="contractForm.get('clientName').hasError('required')">
+            El nombre del cliente es requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Email del Cliente</mat-label>
+          <input matInput formControlName="clientEmail" type="email" required>
+          <mat-error *ngIf="contractForm.get('clientEmail').hasError('required')">
+            El email del cliente es requerido
+          </mat-error>
+          <mat-error *ngIf="contractForm.get('clientEmail').hasError('email')">
+            Por favor ingrese un email válido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="description" rows="3" required></textarea>
+          <mat-error *ngIf="contractForm.get('description').hasError('required')">
+            La descripción es requerida
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row date-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de Inicio</mat-label>
+          <input matInput [matDatepicker]="startPicker" formControlName="startDate" required>
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+          <mat-error *ngIf="contractForm.get('startDate').hasError('required')">
+            La fecha de inicio es requerida
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de Vencimiento</mat-label>
+          <input matInput [matDatepicker]="expPicker" formControlName="expirationDate" required>
+          <mat-datepicker-toggle matSuffix [for]="expPicker"></mat-datepicker-toggle>
+          <mat-datepicker #expPicker></mat-datepicker>
+          <mat-error *ngIf="contractForm.get('expirationDate').hasError('required')">
+            La fecha de vencimiento es requerida
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+    <button 
+      mat-raised-button 
+      color="primary" 
+      [disabled]="contractForm.invalid || isSubmitting"
+      (click)="onSubmit()">
+      {{contract ? 'Actualizar' : 'Agregar'}}
+    </button>
+  </mat-dialog-actions>
+</ng-template>

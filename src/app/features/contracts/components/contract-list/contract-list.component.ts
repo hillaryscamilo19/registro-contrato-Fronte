@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ContractsService } from '../../../../core/services/contracts/contracts.service';
+import { ContractService } from '../../../../core/services/contracts/contracts.service';
+
 
 @Component({
   selector: 'app-contract-list',
@@ -10,7 +11,7 @@ import { ContractsService } from '../../../../core/services/contracts/contracts.
 export class ContractListComponent {
   contracts: any[] = [];
 
-  constructor(private contractsService: ContractsService) {}
+  constructor(private contractsService: ContractService) {}
 
   ngOnInit() {
     this.loadContracts();
