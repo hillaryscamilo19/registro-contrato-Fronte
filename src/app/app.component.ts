@@ -8,7 +8,7 @@ import { ContractdashboardComponent } from './features/contracts/components/cont
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ContractsComponent, ContractdashboardComponent],
+  imports: [RouterOutlet, ContractdashboardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

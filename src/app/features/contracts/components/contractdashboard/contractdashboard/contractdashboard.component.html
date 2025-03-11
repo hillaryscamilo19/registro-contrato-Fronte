@@ -1,0 +1,69 @@
+<!-- src/app/components/contract-dashboard/contract-dashboard.component.html -->
+<div class="dashboard-container">
+    <div class="header">
+      <h1>Registro de Contratos</h1>
+      <app-contract-form 
+        (contractAdded)="onContractAdded($event)">
+      </app-contract-form>
+    </div>
+  
+    <div class="stats-cards">
+      <mat-card class="stats-card">
+        <mat-card-header>
+          <mat-card-title>Total de Contratos</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-value">{{contracts.length}}</div>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="stats-card expiring">
+        <mat-card-header>
+          <mat-card-title>Por Vencer</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-value">{{expiringContracts.length}}</div>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="stats-card expired">
+        <mat-card-header>
+          <mat-card-title>Vencidos</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-value">{{expiredContracts.length}}</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+    <mat-tab-group (selectedIndexChange)="onTabChange($event)">
+      <mat-tab label="Todos los Contratos">
+        <app-contract-table 
+          [contracts]="contracts"
+          (contractUpdated)="onContractUpdated($event)"
+          (contractDeleted)="onContractDeleted($event)">
+        </app-contract-table>
+      </mat-tab>
+      <mat-tab label="Activos">
+        <app-contract-table 
+          [contracts]="activeContracts"
+          (contractUpdated)="onContractUpdated($event)"
+          (contractDeleted)="onContractDeleted($event)">
+        </app-contract-table>
+      </mat-tab>
+      <mat-tab label="Por Vencer">
+        <app-contract-table 
+          [contracts]="expiringContracts"
+          (contractUpdated)="onContractUpdated($event)"
+          (contractDeleted)="onContractDeleted($event)">
+        </app-contract-table>
+      </mat-tab>
+      <mat-tab label="Vencidos">
+        <app-contract-table 
+          [contracts]="expiredContracts"
+          (contractUpdated)="onContractUpdated($event)"
+          (contractDeleted)="onContractDeleted($event)">
+        </app-contract-table>
+      </mat-tab>
+    </mat-tab-group>
+  </div>

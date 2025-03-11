@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Contract } from '../../../../models/Contract.model';
 import { MatDialog } from '@angular/material/dialog';
 
+
 @Component({
   selector: 'app-contract-form',
   templateUrl: './contract-form.component.html',

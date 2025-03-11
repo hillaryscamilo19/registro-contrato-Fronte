@@ -6,7 +6,8 @@
 
 <ng-template #formDialog>
   <h2 mat-dialog-title>{{contract ? 'Editar Contrato' : 'Agregar Nuevo Contrato'}}</h2>
-  <mat-dialog-content>
+  <!-- Reemplazamos mat-dialog-content por un simple div -->
+  <div class="dialog-content">
     <form [formGroup]="contractForm" (ngSubmit)="onSubmit()">
       <div class="form-row">
         <mat-form-field appearance="outline">
@@ -63,7 +64,7 @@
         </mat-form-field>
       </div>
     </form>
-  </mat-dialog-content>
+  </div>
   <mat-dialog-actions align="end">
     <button mat-button (click)="closeDialog()">Cancelar</button>
     <button 

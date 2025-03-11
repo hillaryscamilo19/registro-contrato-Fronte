@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+
 const MaterialComponents = [
   MatButtonModule,
   MatCardModule,

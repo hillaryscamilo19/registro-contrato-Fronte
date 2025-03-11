@@ -3,10 +3,12 @@ import { Contract } from '../../../../../models/Contract.model';
 import { ContractService } from '../../../../../core/services/contracts/contracts.service';
 import { NotificationService } from '../../../../../core/services/notification/notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ContractFormComponent } from "../../contract-form/contract-form.component";
+import { ContractTableComponent } from "../../contract-table/contract-table/contract-table.component";
 
 @Component({
   selector: 'app-contractdashboard',
-  imports: [],
+  imports: [ContractFormComponent, ContractTableComponent],
   templateUrl: './contractdashboard.component.html',
   styleUrl: './contractdashboard.component.css'
 })
